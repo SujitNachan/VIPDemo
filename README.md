@@ -13,4 +13,4 @@
 - Closures 
 - Caching for saving image
 - UserDefaults for bookmark movies
-- API handing
+- Network call handling
