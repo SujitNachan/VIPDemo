@@ -9,6 +9,7 @@ import UIKit
 
 class MovieDetailViewConfigurator: Configurator {
     private let movie: Movie
+    var dimissHandler: (() -> Void)?
     
     init(movie: Movie) {
         self.movie = movie

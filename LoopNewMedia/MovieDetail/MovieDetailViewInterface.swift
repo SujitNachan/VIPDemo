@@ -11,18 +11,21 @@ protocol MovieDetailViewControllerInterface: PresenterViewInterface {
     func showActivityIndicator()
     func hideActivityIndicator()
     func showAlertView(message: String)
-    func updateMovieData(_ movie: Movie)
+    func updateMovieData(_ movieViewModel: MovieViewModel)
+    func updateBookmarkButton(_ movieViewModel: MovieViewModel)
 }
 
 protocol MovieDetailViewInteractorInterface {
     func getMovieData()
+    func bookmarkMovie(_ movieViewModel: MovieViewModel)
 }
 
 protocol MovieDetailViewPresenterInterface {
     func showActivityIndicator()
     func hideActivityIndicator()
     func showAlertView(message: String)
-    func updateMovieData(_ movie: Movie)
+    func updateMovieData(_ movieViewModel: MovieViewModel)
+    func updateBookmarkButton(_ movieViewModel: MovieViewModel)
 }
 
 protocol MovieDetailViewRouterInterface {

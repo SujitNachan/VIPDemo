@@ -7,10 +7,21 @@
 
 import UIKit
 
+enum MovieDetailViewSections: Int, CaseIterable {
+    case poster
+    case overView
+    case director
+    case actors
+    case keyFacts
+}
+
+
+
 class MovieDetailViewController: UIViewController {
     private var interactor: MovieDetailViewInteractorInterface?
     private var movieTableView: UITableView?
-    private var movie: Movie?
+    private var movieViewModel: MovieViewModel?
+    private let bookmarkButton = UIButton(type: .custom)
     
     init(interactor: MovieDetailViewInteractorInterface) {
         self.interactor = interactor
@@ -41,7 +52,6 @@ class MovieDetailViewController: UIViewController {
         closeButtonItem.customView?.widthAnchor.constraint(equalToConstant: 40).isActive = true
         closeButtonItem.customView?.heightAnchor.constraint(equalToConstant: 30).isActive = true
         
-        let bookmarkButton = UIButton(type: .custom)
         bookmarkButton.setImage(UIImage(named: "BookmarkBlack"), for: .normal)
         bookmarkButton.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
         bookmarkButton.imageEdgeInsets = UIEdgeInsets(top: 5, left: 26, bottom: 5, right: 20)
@@ -64,6 +74,7 @@ class MovieDetailViewController: UIViewController {
         movieTableView?.delegate = self
         movieTableView?.dataSource = self
         movieTableView?.register(MoviePosterTitleTableViewCell.self)
+        movieTableView?.register(MovieOverviewTableViewCell.self)
     }
     
     @objc private func closeButtonClicked() {
@@ -71,13 +82,25 @@ class MovieDetailViewController: UIViewController {
     }
     
     @objc private func bookmarkButtonClicked() {
-        
+        if let movieViewModel = movieViewModel {
+            interactor?.bookmarkMovie(movieViewModel)
+        }
+    }
+    
+    private func updateBookmarkImage(id: Int) {
+        bookmarkButton.setImage(UIImage(named: UserDefaultDataManager.shared.retriveBookMarks().contains(id) ? "BookmarkFill" : "BookmarkBlack"), for: .normal)
     }
 }
 
 extension MovieDetailViewController: MovieDetailViewControllerInterface {
-    func updateMovieData(_ movie: Movie) {
-        self.movie = movie
+    func updateBookmarkButton(_ movieViewModel: MovieViewModel) {
+        UserDefaultDataManager.shared.retriveBookMarks().contains(movieViewModel.id) ? UserDefaultDataManager.shared.removeBookmark(id: movieViewModel.id) : UserDefaultDataManager.shared.addBookmark(id: movieViewModel.id)
+        updateBookmarkImage(id: movieViewModel.id)
+    }
+    
+    func updateMovieData(_ movieViewModel: MovieViewModel) {
+        updateBookmarkImage(id: movieViewModel.id)
+        self.movieViewModel = movieViewModel
         self.movieTableView?.reloadData()
     }
     
@@ -94,13 +117,47 @@ extension MovieDetailViewController: MovieDetailViewControllerInterface {
 
 
 extension MovieDetailViewController: UITableViewDataSource, UITableViewDelegate {
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return MovieDetailViewSections.allCases.count
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let moviePosterCell: MoviePosterTitleTableViewCell = tableView.dequeueReusableCell(for: indexPath)
-        moviePosterCell.cellData = self.movie
-        return moviePosterCell
+        switch indexPath.section {
+        case MovieDetailViewSections.poster.rawValue:
+            let moviePosterCell: MoviePosterTitleTableViewCell = tableView.dequeueReusableCell(for: indexPath)
+            moviePosterCell.cellData = self.movieViewModel
+            return moviePosterCell
+//        case MovieDetailViewSections.overView.rawValue:
+            
+        default:
+            let overViewCell: MovieOverviewTableViewCell = tableView.dequeueReusableCell(for: indexPath)
+            return overViewCell
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        var title = ""
+        switch section {
+        case MovieDetailViewSections.overView.rawValue:
+            title = "OverView"
+        case MovieDetailViewSections.director.rawValue:
+            title = "Director"
+        case MovieDetailViewSections.actors.rawValue:
+            title = "Actors"
+        case MovieDetailViewSections.keyFacts.rawValue:
+            title = "Key Facts"
+        default:
+            return nil
+        }
+        let headerWithLabel = HeaderViewWithLabel(title: title)
+        return headerWithLabel
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return section == MovieDetailViewSections.poster.rawValue ? 0 : 40
     }
 }

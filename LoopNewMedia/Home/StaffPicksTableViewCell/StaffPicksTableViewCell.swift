@@ -20,7 +20,7 @@ class StaffPicksTableViewCell: UITableViewCell, ReusableView, NibLoadableView {
             movieTitleLabel?.text = celldata?.movieTitle
             movieReleaseYearLabel?.text = celldata?.movieReleaseYear
             movieRatingView?.rating = celldata?.ratings ?? 0
-            bookmarkImageView?.image = (celldata?.bookmarkStatus ?? false) ? UIImage(named: "BookmarkFill") : UIImage(named: "Bookmark")
+            bookmarkImageView?.image = (UserDefaultDataManager.shared.retriveBookMarks().contains(celldata?.id ?? 0) ) ? UIImage(named: "BookmarkFill") : UIImage(named: "Bookmark")
         }
     }
     
@@ -53,7 +53,6 @@ struct StaffPicksViewModel {
     let posterImageURL: String?
     let movieTitle: String?
     let movieReleaseYear: String?
-    var bookmarkStatus: Bool? 
     let ratings: Double?
 }
 

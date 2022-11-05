@@ -147,7 +147,6 @@ class TagListView: UIView {
             currentRowView.frame.size.height = max(tagViewHeight, currentRowView.frame.height)
         }
         rows = currentRow
-        
         invalidateIntrinsicContentSize()
     }
     
@@ -159,10 +158,8 @@ class TagListView: UIView {
     @discardableResult
     open func addTagViews(_ tagViewList: [TagView]) -> [TagView] {
         defer { rearrangeViews() }
-        var maxWidth: CGFloat = 0
         tagViewList.forEach {
             tagViews.append($0)
-            maxWidth += $0.bounds.width
             tagBackgroundViews.append(UIView(frame: $0.bounds))
         }
         return tagViews

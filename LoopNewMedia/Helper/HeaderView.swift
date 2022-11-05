@@ -33,33 +33,39 @@ class HeaderViewWithButton: UIView {
 }
 
 class HeaderViewWithLabel: UIView {
-    var headerTitleLabel: UILabel!
+    private var headerTitleLabel: UILabel!
     private var headerTitle: String!
     private var headerColor: UIColor!
+    private var fontToChange: UIFont?
+    private var textToChange: String?
+    private var titleFont: UIFont?
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        
+    required public init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        setupUI()
     }
     
-    convenience init(headerTitle: String, headerColor: UIColor) {
-        self.init()
-        self.headerTitle = headerTitle
-        self.headerColor = headerColor
-        self.setupUI()
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+    public init(title: String, titleColor: UIColor = .black, titleFont: UIFont? = UIFont.SFProDisplay(.medium, size: 16) ,textToChange: String? = nil, fontToChange: UIFont? = nil) {
+        super.init(frame: CGRect.zero)
+        self.headerTitle = title
+        self.headerColor = titleColor
+        self.fontToChange = fontToChange
+        self.textToChange = textToChange
+        self.titleFont = titleFont
+        setupUI()
     }
     
     private func setupUI() {
-        headerTitleLabel = UILabel(frame: CGRect(x: 20, y: 8, width: 320, height: 20))
-        headerTitleLabel.font = UIFont.boldSystemFont(ofSize: 18)
+        headerTitleLabel = UILabel(frame: CGRect(x: 30, y: 8, width: 320, height: 20))
+        headerTitleLabel.font = titleFont
         headerTitleLabel.text = headerTitle
         headerTitleLabel.textColor = headerColor
-        let headerView = UIView()
-        headerView.addSubview(headerTitleLabel)
+        if let fontToChange = fontToChange,
+           let textToChange = textToChange
+        {
+            headerTitleLabel.changeFont(ofText: textToChange, with: fontToChange)
+        }
+        self.addSubview(headerTitleLabel)
     }
 }
 

@@ -287,3 +287,11 @@ extension Date {
         return dateFormatter.string(from: self)
     }
 }
+
+extension Double {
+    var secondsToHoursMinutesSeconds: String {
+        let (hr,  minf) = modf(self / 3600)
+        let (min, _) = modf(60 * minf)
+        return ("\(Int(hr))h \(Int(min))m")
+    }
+}

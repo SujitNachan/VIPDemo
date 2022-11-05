@@ -8,8 +8,8 @@
 import Foundation
 
 class MovieDetailViewPresenter: MovieDetailViewPresenterInterface {
-    func updateMovieData(_ movie: Movie) {
-        viewController?.updateMovieData(movie)
+    func updateMovieData(_ movieViewModel: MovieViewModel) {
+        viewController?.updateMovieData(movieViewModel)
     }
     
     weak var viewController: MovieDetailViewControllerInterface?
@@ -24,5 +24,9 @@ class MovieDetailViewPresenter: MovieDetailViewPresenterInterface {
     
     func showAlertView(message: String) {
         viewController?.showAlertView(message: message)
+    }
+    
+    func updateBookmarkButton(_ movieViewModel: MovieViewModel) {
+        viewController?.updateBookmarkButton(movieViewModel)
     }
 }

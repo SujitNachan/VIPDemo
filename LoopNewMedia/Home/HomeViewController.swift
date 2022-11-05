@@ -97,16 +97,9 @@ extension HomeViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let myLabel = UILabel(frame: CGRect(x: 30, y: 8, width: 320, height: 20))
-        
-        myLabel.font = UIFont.SFProDisplay(.regular, size: 12)
-        myLabel.text = self.tableView(tableView, titleForHeaderInSection: section)
         guard let boldfont = UIFont.SFProDisplay(.bold, size: 12) else {
             return nil
         }
-        let headerView = UIView()
-        
-        
         switch section {
         case HomeViewSections.searchButton.rawValue:
             let headerView = HeaderViewWithButton(frame: CGRect(x: 0, y: 0, width: tableView.bounds.width, height: 48)).with { [weak self] headerViewObj in
@@ -115,27 +108,15 @@ extension HomeViewController: UITableViewDelegate {
             }
             return headerView
         case HomeViewSections.yourFavorites.rawValue:
-            myLabel.changeFont(ofText: "FAVORITES", with: boldfont)
-            myLabel.textColor = .black
+            let headerWithLabel = HeaderViewWithLabel(title: "YOUR FAVORITES", titleFont: UIFont.SFProDisplay(.regular, size: 12), textToChange: "FAVORITES", fontToChange: boldfont)
+            return headerWithLabel
         case HomeViewSections.ourStaff.rawValue:
-            myLabel.changeFont(ofText: "STAFF PICKS", with: boldfont)
-            myLabel.textColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+            let headerWithLabel = HeaderViewWithLabel(title: "OUR STAFF PICKS", titleColor: .white, titleFont: UIFont.SFProDisplay(.regular, size: 12), textToChange: "STAFF PICKS", fontToChange: boldfont)
+            return headerWithLabel
         default:
             break
         }
-        headerView.addSubview(myLabel)
-        return headerView
-    }
-    
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        switch section {
-        case HomeViewSections.yourFavorites.rawValue:
-            return "YOUR FAVORITES"
-        case HomeViewSections.ourStaff.rawValue:
-            return "OUR STAFF PICKS"
-        default:
-            return nil
-        }
+        return nil
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -150,8 +131,6 @@ extension HomeViewController: UITableViewDelegate {
 
 extension HomeViewController: HomeViewControllerInterface {
     func bookmarkStaffPicks(at index: Int) {
-        self.staffPicks[index].bookmarkStatus = !(self.staffPicks[index].bookmarkStatus ?? false)
-        
         self.movieTableView?.reloadRows(at: [IndexPath(row: index, section: HomeViewSections.ourStaff.rawValue)], with: .automatic)
     }
     

@@ -14,7 +14,9 @@ class HomeViewRouter {
 extension HomeViewRouter: HomeViewRouterInterface {
     func navigateToMovieDetailScreen(movie: Movie) {
         let movieDetailConfigurator = MovieDetailViewConfigurator(movie: movie)
+        movieDetailConfigurator.dimissHandler = { [weak self] in
+            print("dismissHandler")
+        }
         self.viewController?.present(UINavigationController(rootViewController: movieDetailConfigurator.configViewController()), animated: true)
-//        self.viewController?.present(movieDetailConfigurator.configViewController(), animated: true)
     }
 }
