@@ -142,7 +142,7 @@ class TagListView: UIView {
             currentRowTagCount += 1
             currentRowWidth += tagView.frame.width + marginX
             
-            currentRowView.frame.origin.x = 0
+            currentRowView.frame.origin.x = (frameWidth - (currentRowWidth - marginX)) / 2
             currentRowView.frame.size.width = currentRowWidth
             currentRowView.frame.size.height = max(tagViewHeight, currentRowView.frame.height)
         }
@@ -159,8 +159,10 @@ class TagListView: UIView {
     @discardableResult
     open func addTagViews(_ tagViewList: [TagView]) -> [TagView] {
         defer { rearrangeViews() }
+        var maxWidth: CGFloat = 0
         tagViewList.forEach {
             tagViews.append($0)
+            maxWidth += $0.bounds.width
             tagBackgroundViews.append(UIView(frame: $0.bounds))
         }
         return tagViews
@@ -170,7 +172,8 @@ class TagListView: UIView {
         let tagView = TagView(title: title)
         tagView.textAlignment = .center
         tagView.textColor = .black
-        tagView.tagBackgroundColor = .lightGray.withAlphaComponent(0.4)
+        tagView.font = UIFont.SFProDisplay(.regular, size: 14)
+        tagView.tagBackgroundColor = #colorLiteral(red: 0.1000831202, green: 0.1472782791, blue: 0.1932071447, alpha: 0.05)
         tagView.cornerRadius = 8
         return tagView
     }

@@ -62,8 +62,8 @@
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.598986359680591" colorSpace="custom" customColorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LoR-ux-Mp6">
-                        <rect key="frame" x="130" y="397" width="60" height="29"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LoR-ux-Mp6">
+                        <rect key="frame" x="30" y="397" width="260" height="29"/>
                         <fontDescription key="fontDescription" name="SFProDisplay-Bold" family="SF Pro Display" pointSize="24"/>
                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
@@ -86,6 +86,7 @@
                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 <constraints>
                     <constraint firstItem="egr-oS-O1S" firstAttribute="centerX" secondItem="aJJ-8g-BGE" secondAttribute="centerX" id="4Pp-hJ-Z94"/>
+                    <constraint firstItem="LoR-ux-Mp6" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="30" id="5ZQ-wt-Rve"/>
                     <constraint firstItem="SiG-G7-y25" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="30" id="A1d-VQ-NMt"/>
                     <constraint firstItem="SiG-G7-y25" firstAttribute="top" secondItem="LoR-ux-Mp6" secondAttribute="bottom" constant="12" id="BmH-np-dMf"/>
                     <constraint firstItem="aJJ-8g-BGE" firstAttribute="top" secondItem="4Uu-7X-Yuf" secondAttribute="bottom" constant="18" id="Eq4-NX-5fL"/>
@@ -94,6 +95,7 @@
                     <constraint firstItem="LoR-ux-Mp6" firstAttribute="centerX" secondItem="egr-oS-O1S" secondAttribute="centerX" id="Qka-Qg-bHA"/>
                     <constraint firstItem="egr-oS-O1S" firstAttribute="top" secondItem="aJJ-8g-BGE" secondAttribute="bottom" constant="12" id="RX3-SL-Ais"/>
                     <constraint firstItem="LoR-ux-Mp6" firstAttribute="top" secondItem="egr-oS-O1S" secondAttribute="bottom" constant="10" id="WrA-Md-TyV"/>
+                    <constraint firstAttribute="trailing" secondItem="LoR-ux-Mp6" secondAttribute="trailing" constant="30" id="en6-4l-1MQ"/>
                     <constraint firstAttribute="bottom" secondItem="SiG-G7-y25" secondAttribute="bottom" constant="8" id="fyl-ze-Sxf"/>
                     <constraint firstAttribute="trailing" secondItem="SiG-G7-y25" secondAttribute="trailing" constant="30" id="pGU-oF-NuV"/>
                     <constraint firstItem="aJJ-8g-BGE" firstAttribute="centerX" secondItem="h7i-pj-6I2" secondAttribute="centerX" id="yFg-ks-b7c"/>
