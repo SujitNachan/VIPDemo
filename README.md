@@ -8,7 +8,7 @@
 - VIPER architecture pattern
 - Singleton design pattern 
 - POP
-- CustomViews
+- CustomViews created like ratings, tags 
 - Generics
 - Closures 
 - Caching for saving image
