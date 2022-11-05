@@ -11,6 +11,6 @@
 - CustomViews created like ratings, tags 
 - Generics
 - Closures 
-- Caching for saving image
+- Caching for saving images
 - UserDefaults for bookmark movies
 - Network call handling
