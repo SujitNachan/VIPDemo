@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="YourFavoriteMovieCollectionViewCell" id="gTV-IL-0wX" customClass="YourFavoriteMovieCollectionViewCell" customModule="LoopNewMedia" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="196" height="284"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="196" height="284"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2cb-9U-kna">
+                        <rect key="frame" x="14" y="14" width="168" height="256"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="qul-g5-ISR" customClass="ImageViewWithCache" customModule="LoopNewMedia" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="168" height="256"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="qul-g5-ISR" firstAttribute="top" secondItem="2cb-9U-kna" secondAttribute="top" id="JCD-wc-QLH"/>
+                            <constraint firstItem="qul-g5-ISR" firstAttribute="leading" secondItem="2cb-9U-kna" secondAttribute="leading" id="pQl-wY-QZT"/>
+                            <constraint firstAttribute="bottom" secondItem="qul-g5-ISR" secondAttribute="bottom" id="wvZ-WX-nPx"/>
+                            <constraint firstAttribute="trailing" secondItem="qul-g5-ISR" secondAttribute="trailing" id="xBc-R5-834"/>
+                        </constraints>
+                    </view>
+                </subviews>
+            </view>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <constraints>
+                <constraint firstItem="2cb-9U-kna" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="14" id="4v2-TF-ZbF"/>
+                <constraint firstAttribute="bottom" secondItem="2cb-9U-kna" secondAttribute="bottom" constant="14" id="A8O-cq-uZN"/>
+                <constraint firstAttribute="trailing" secondItem="2cb-9U-kna" secondAttribute="trailing" constant="14" id="EMs-65-LLi"/>
+                <constraint firstItem="2cb-9U-kna" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="14" id="eOn-q1-eU8"/>
+            </constraints>
+            <size key="customSize" width="313" height="204"/>
+            <connections>
+                <outlet property="containerView" destination="2cb-9U-kna" id="jMT-76-KJM"/>
+                <outlet property="movieImageView" destination="qul-g5-ISR" id="XrM-H4-VWj"/>
+            </connections>
+            <point key="canvasLocation" x="246.37681159420291" y="100.44642857142857"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
