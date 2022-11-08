@@ -155,6 +155,12 @@ class TagListView: UIView {
         return addTagViews(titles.map(createNewTagView))
     }
     
+    open func removeAllTags() {
+        tagViews.removeAll()
+        tagBackgroundViews.removeAll()
+        rowViews.removeAll()
+    }
+    
     @discardableResult
     open func addTagViews(_ tagViewList: [TagView]) -> [TagView] {
         defer { rearrangeViews() }

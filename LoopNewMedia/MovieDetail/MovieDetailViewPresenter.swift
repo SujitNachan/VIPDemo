@@ -8,11 +8,11 @@
 import Foundation
 
 class MovieDetailViewPresenter: MovieDetailViewPresenterInterface {
-    func updateMovieData(_ movieViewModel: MovieViewModel) {
-        viewController?.updateMovieData(movieViewModel)
-    }
-    
     weak var viewController: MovieDetailViewControllerInterface?
+
+    func updateSectionsData(_ movieSectionDetailViewModel: MovieSectionDetailViewModel) {
+        viewController?.updateSectionsData(movieSectionDetailViewModel)
+    }
     
     func showActivityIndicator() {
         viewController?.showActivityIndicator()

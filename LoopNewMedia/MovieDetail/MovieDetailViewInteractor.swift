@@ -7,43 +7,47 @@
 
 import Foundation
 
-struct MovieDetailViewConfiguration {
-    
+protocol MovieDetailViewConfiguration {
+    var movie: Movie? { get set }
+}
+
+struct MovieDetailViewData: MovieDetailViewConfiguration {
+    var movie: Movie?
 }
 
 class MovieDetailViewInteractor: MovieDetailViewInteractorInterface {
     private let presenter: MovieDetailViewPresenterInterface
     private let router: MovieDetailViewRouterInterface
-    private var movie: Movie?
+    private let movieDetailViewConfiguration: MovieDetailViewConfiguration
     
-    init(presenter: MovieDetailViewPresenterInterface, router: MovieDetailViewRouterInterface, movie: Movie) {
-        self.presenter = presenter
-        self.router = router
-        self.movie = movie
-    }
-    
-    func getMovieData() {
-        if let movie = movie {
-            self.presenter.updateMovieData(MovieViewModel(id: movie.id ?? Int.min, posterUrl: movie.posterUrl, rating: movie.rating, releaseDateWithDuration: releaseDateWithDuration, movieTitle: movie.title, releaseYear: movieReleaseYear, genres: movie.genres ?? []))
-        }
-    }
-    
-    func bookmarkMovie(_ movieViewModel: MovieViewModel) {
-        presenter.updateBookmarkButton(movieViewModel)
-    }
-    
-    var releaseDateWithDuration: String? {
+    private var releaseDateWithDuration: String? {
         var releaseDateDuration = ""
-        if let releaseDate = movie?.releaseDate?.getDate?.getDDDotMMDotYYYY {
+        if let releaseDate = movieDetailViewConfiguration.movie?.releaseDate?.getDate?.getDDDotMMDotYYYY {
             releaseDateDuration += releaseDate
         }
-        if let runtime = movie?.runtime {
+        if let runtime = movieDetailViewConfiguration.movie?.runtime {
             releaseDateDuration += " - " + Double(runtime*60).secondsToHoursMinutesSeconds
         }
         return releaseDateDuration
     }
     
-    var movieReleaseYear: String? {
-        return movie?.releaseDate?.getDate?.getYYYY
+    private var movieReleaseYear: String? {
+        return movieDetailViewConfiguration.movie?.releaseDate?.getDate?.getYYYY
+    }
+    
+    init(presenter: MovieDetailViewPresenterInterface, router: MovieDetailViewRouterInterface, movieDetailViewConfiguration: MovieDetailViewConfiguration) {
+        self.presenter = presenter
+        self.router = router
+        self.movieDetailViewConfiguration = movieDetailViewConfiguration
+    }
+    
+    func getSectionsData() {
+        if let movie = movieDetailViewConfiguration.movie {
+            self.presenter.updateSectionsData(MovieSectionDetailViewModel(movieViewModel: MovieViewModel(id: movie.id ?? Int.min, posterUrl: movie.posterUrl, rating: movie.rating, releaseDateWithDuration: releaseDateWithDuration, movieTitle: movie.title, releaseYear: movieReleaseYear, genres: movie.genres ?? []), overView: movie.overview, director: TableViewCellWithCollectionViewViewModel(id: nil, imageURL: movie.director?.pictureUrl, text: movie.director?.name), actors: movie.cast?.compactMap({TableViewCellWithCollectionViewViewModel(id: nil, imageURL: $0.pictureUrl, text: $0.name)}) ?? []))
+        }
+    }
+    
+    func bookmarkMovie(_ movieViewModel: MovieViewModel) {
+        presenter.updateBookmarkButton(movieViewModel)
     }
 }

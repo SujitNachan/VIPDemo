@@ -9,6 +9,11 @@ import Foundation
 import UIKit
 
 class MovieOverviewTableViewCell: UITableViewCell, ReusableView {
+    var cellData: String? {
+        didSet {
+            textLabel?.text = cellData
+        }
+    }
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)

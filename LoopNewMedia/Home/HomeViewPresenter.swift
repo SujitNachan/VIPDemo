@@ -19,7 +19,7 @@ extension HomeViewPresenter: HomeViewPresenterInterface {
         viewController?.update(staffPicks: staffPicks)
     }
     
-    func update(movies: [YourFavoriteMovieViewModel]) {
+    func update(movies: [TableViewCellWithCollectionViewViewModel]) {
         viewController?.update(movies: movies)
     }
     

@@ -18,7 +18,7 @@ class MovieDetailViewConfigurator: Configurator {
     func configViewController() -> UIViewController {
         let movieDetailViewPresenter = MovieDetailViewPresenter()
         let movieDetailViewRouter = MovieDetailViewRouter()
-        let interactor = MovieDetailViewInteractor(presenter: movieDetailViewPresenter, router: movieDetailViewRouter, movie: movie)
+        let interactor = MovieDetailViewInteractor(presenter: movieDetailViewPresenter, router: movieDetailViewRouter, movieDetailViewConfiguration: MovieDetailViewData(movie: movie))
         let viewController = MovieDetailViewController(interactor: interactor)
         movieDetailViewPresenter.viewController = viewController
         movieDetailViewRouter.viewController = viewController

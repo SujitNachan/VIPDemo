@@ -17,7 +17,7 @@ class HomeViewController: UIViewController {
     private var movieTableView: UITableView?
     var interactor: HomeViewInteractorInterface?
     private var staffPicks: [StaffPicksViewModel] = []
-    private var yourFavoriteMovies: [YourFavoriteMovieViewModel] = []
+    private var yourFavoriteMovies: [TableViewCellWithCollectionViewViewModel] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,7 +42,7 @@ class HomeViewController: UIViewController {
         movieTableView?.delegate = self
         movieTableView?.dataSource = self
         movieTableView?.register(StaffPicksTableViewCell.self)
-        movieTableView?.register(FavoriteMovieCell.self)
+        movieTableView?.register(TableViewCellWithCollectionView.self)
     }
 }
 
@@ -73,9 +73,9 @@ extension HomeViewController: UITableViewDataSource {
             return staffCell
         default:
             
-            let movieCell: FavoriteMovieCell = tableView.dequeueReusableCell(for: indexPath)
+            let movieCell: TableViewCellWithCollectionView = tableView.dequeueReusableCell(for: indexPath)
             movieCell.cellData = self.yourFavoriteMovies
-            movieCell.movieSelectHandler = { [unowned self] yourFavoriteMovie in
+            movieCell.didSelectHandler = { [unowned self] yourFavoriteMovie in
                 self.interactor?.movieDidSelect(yourFavoriteMovieViewModel: yourFavoriteMovie)
             }
             return movieCell
@@ -134,7 +134,7 @@ extension HomeViewController: HomeViewControllerInterface {
         self.movieTableView?.reloadRows(at: [IndexPath(row: index, section: HomeViewSections.ourStaff.rawValue)], with: .automatic)
     }
     
-    func update(movies: [YourFavoriteMovieViewModel]) {
+    func update(movies: [TableViewCellWithCollectionViewViewModel]) {
         self.yourFavoriteMovies = movies
         self.movieTableView?.reloadData()
     }

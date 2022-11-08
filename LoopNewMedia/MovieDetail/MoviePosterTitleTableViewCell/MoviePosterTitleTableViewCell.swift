@@ -43,6 +43,11 @@ class MoviePosterTitleTableViewCell: UITableViewCell, ReusableView, NibLoadableV
         }
     }
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        tagListView?.removeAllTags()
+    }
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

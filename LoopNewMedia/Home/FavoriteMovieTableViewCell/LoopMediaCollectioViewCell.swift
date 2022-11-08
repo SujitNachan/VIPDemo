@@ -7,14 +7,17 @@
 
 import UIKit
 
-class YourFavoriteMovieCollectionViewCell: UICollectionViewCell, ReusableView, NibLoadableView {
+class LoopMediaCollectioViewCell: UICollectionViewCell, ReusableView, NibLoadableView {
     
-    @IBOutlet private weak var movieImageView: ImageViewWithCache!
+    @IBOutlet private weak var label: UILabel!
+    @IBOutlet private weak var imageView: ImageViewWithCache!
     @IBOutlet private weak var containerView: UIView!
     
-    var celldata: YourFavoriteMovieViewModel? {
+    var celldata: TableViewCellWithCollectionViewViewModel? {
         didSet {
-            movieImageView.loadImage(urlString: celldata?.imageURL)
+            imageView.loadImage(urlString: celldata?.imageURL)
+            label.isHidden = (celldata?.text?.isEmpty ?? false)
+            label.text = celldata?.text
         }
     }
     
@@ -31,13 +34,7 @@ class YourFavoriteMovieCollectionViewCell: UICollectionViewCell, ReusableView, N
         containerView.layer.shadowRadius = 4.0
         containerView.layer.shadowOpacity = 1
           
-        movieImageView.layer.cornerRadius = 14
-        movieImageView.clipsToBounds = true
+        imageView.layer.cornerRadius = 14
+        imageView.clipsToBounds = true
     }
-}
-
-
-struct YourFavoriteMovieViewModel {
-    let id: Int?
-    let imageURL: String?
 }

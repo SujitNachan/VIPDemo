@@ -15,12 +15,17 @@ enum MovieDetailViewSections: Int, CaseIterable {
     case keyFacts
 }
 
-
+struct MovieSectionDetailViewModel {
+    let movieViewModel: MovieViewModel?
+    let overView: String?
+    let director: TableViewCellWithCollectionViewViewModel?
+    let actors: [TableViewCellWithCollectionViewViewModel]
+}
 
 class MovieDetailViewController: UIViewController {
     private var interactor: MovieDetailViewInteractorInterface?
     private var movieTableView: UITableView?
-    private var movieViewModel: MovieViewModel?
+    private var movieSectionDetailViewModel: MovieSectionDetailViewModel?
     private let bookmarkButton = UIButton(type: .custom)
     
     init(interactor: MovieDetailViewInteractorInterface) {
@@ -39,7 +44,7 @@ class MovieDetailViewController: UIViewController {
 //        navigationItem.title = "Detail"
         setupNavigationBar()
         setupUI()
-        interactor?.getMovieData()
+        interactor?.getSectionsData()
     }
     
     private func setupNavigationBar() {
@@ -75,6 +80,7 @@ class MovieDetailViewController: UIViewController {
         movieTableView?.dataSource = self
         movieTableView?.register(MoviePosterTitleTableViewCell.self)
         movieTableView?.register(MovieOverviewTableViewCell.self)
+        movieTableView?.register(TableViewCellWithCollectionView.self)
     }
     
     @objc private func closeButtonClicked() {
@@ -82,7 +88,7 @@ class MovieDetailViewController: UIViewController {
     }
     
     @objc private func bookmarkButtonClicked() {
-        if let movieViewModel = movieViewModel {
+        if let movieViewModel = movieSectionDetailViewModel?.movieViewModel {
             interactor?.bookmarkMovie(movieViewModel)
         }
     }
@@ -98,9 +104,8 @@ extension MovieDetailViewController: MovieDetailViewControllerInterface {
         updateBookmarkImage(id: movieViewModel.id)
     }
     
-    func updateMovieData(_ movieViewModel: MovieViewModel) {
-        updateBookmarkImage(id: movieViewModel.id)
-        self.movieViewModel = movieViewModel
+    func updateSectionsData(_ movieSectionDetailViewModel: MovieSectionDetailViewModel) {
+        self.movieSectionDetailViewModel = movieSectionDetailViewModel
         self.movieTableView?.reloadData()
     }
     
@@ -129,12 +134,24 @@ extension MovieDetailViewController: UITableViewDataSource, UITableViewDelegate 
         switch indexPath.section {
         case MovieDetailViewSections.poster.rawValue:
             let moviePosterCell: MoviePosterTitleTableViewCell = tableView.dequeueReusableCell(for: indexPath)
-            moviePosterCell.cellData = self.movieViewModel
+            moviePosterCell.cellData = self.movieSectionDetailViewModel?.movieViewModel
             return moviePosterCell
 //        case MovieDetailViewSections.overView.rawValue:
+        case MovieDetailViewSections.director.rawValue:
+            let directorCell: TableViewCellWithCollectionView = tableView.dequeueReusableCell(for: indexPath)
+            if let director = self.movieSectionDetailViewModel?.director {
+                directorCell.cellData = [director]
+            }
+            return directorCell
+            
+        case MovieDetailViewSections.actors.rawValue:
+            let actorCell: TableViewCellWithCollectionView = tableView.dequeueReusableCell(for: indexPath)
+            actorCell.cellData = self.movieSectionDetailViewModel?.actors
+            return actorCell
             
         default:
             let overViewCell: MovieOverviewTableViewCell = tableView.dequeueReusableCell(for: indexPath)
+            overViewCell.cellData = movieSectionDetailViewModel?.overView
             return overViewCell
         }
     }

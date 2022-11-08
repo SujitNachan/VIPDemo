@@ -7,22 +7,29 @@
 
 import UIKit
 
-class FavoriteMovieCell: UITableViewCell, ReusableView, NibLoadableView {
+struct TableViewCellWithCollectionViewViewModel {
+    let id: Int?
+    let imageURL: String?
+    let text: String?
+}
+
+class TableViewCellWithCollectionView: UITableViewCell, ReusableView, NibLoadableView {
     @IBOutlet private weak var collectionView: UICollectionView!
     
-    var cellData: [YourFavoriteMovieViewModel]? {
+    var cellData: [TableViewCellWithCollectionViewViewModel]? {
         didSet {
             collectionView.reloadData()
         }
     }
     
-    var movieSelectHandler: ((_ yourFavoriteMovieViewModel: YourFavoriteMovieViewModel) -> ())?
+    var didSelectHandler: ((_ yourFavoriteMovieViewModel: TableViewCellWithCollectionViewViewModel) -> ())?
     
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        collectionView.register(YourFavoriteMovieCollectionViewCell.self)
+        collectionView.register(LoopMediaCollectioViewCell.self)
         collectionView.registerSupplementaryView(YourFavoriteMovieCollectionFooterView.self, ofKind: UICollectionView.elementKindSectionFooter)
+
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -33,13 +40,13 @@ class FavoriteMovieCell: UITableViewCell, ReusableView, NibLoadableView {
     
 }
 
-extension FavoriteMovieCell: UICollectionViewDataSource {
+extension TableViewCellWithCollectionView: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return cellData?.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell: YourFavoriteMovieCollectionViewCell = collectionView.dequeueReusableCell(for: indexPath)
+        let cell: LoopMediaCollectioViewCell = collectionView.dequeueReusableCell(for: indexPath)
         if let celldata = cellData {
             cell.celldata = celldata[indexPath.row]
         }
@@ -47,7 +54,7 @@ extension FavoriteMovieCell: UICollectionViewDataSource {
     }
 }
 
-extension FavoriteMovieCell: UICollectionViewDelegate {
+extension TableViewCellWithCollectionView: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         switch kind {
             case UICollectionView.elementKindSectionFooter:
@@ -60,7 +67,7 @@ extension FavoriteMovieCell: UICollectionViewDelegate {
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if let yourFavoriteMovieViewModel = cellData?[indexPath.row] {
-            movieSelectHandler?(yourFavoriteMovieViewModel)
+            didSelectHandler?(yourFavoriteMovieViewModel)
         }
     }
 }

@@ -15,14 +15,14 @@ protocol HomeViewControllerInterface: PresenterViewInterface {
     func hideActivityIndicator()
     func showAlertView(message: String)
     func update(staffPicks: [StaffPicksViewModel])
-    func update(movies: [YourFavoriteMovieViewModel])
+    func update(movies: [TableViewCellWithCollectionViewViewModel])
     func bookmarkStaffPicks(at index: Int)
 }
 
 protocol HomeViewInteractorInterface {
     func fetchMovies()
     func fetchStaffPicks()
-    func movieDidSelect(yourFavoriteMovieViewModel: YourFavoriteMovieViewModel)
+    func movieDidSelect(yourFavoriteMovieViewModel: TableViewCellWithCollectionViewViewModel)
     func staffPicksDidSelect(staffPicksViewModel: StaffPicksViewModel)
     func bookmarkStaffPicks(at index: Int)
     func cancelDataTask()
@@ -33,7 +33,7 @@ protocol HomeViewPresenterInterface {
     func hideActivityIndicator()
     func showAlertView(message: String)
     func update(staffPicks: [StaffPicksViewModel])
-    func update(movies: [YourFavoriteMovieViewModel])
+    func update(movies: [TableViewCellWithCollectionViewViewModel])
     func bookmarkStaffPicks(at index: Int)
 }
 
