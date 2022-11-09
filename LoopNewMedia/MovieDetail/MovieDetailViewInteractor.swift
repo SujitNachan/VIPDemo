@@ -43,7 +43,7 @@ class MovieDetailViewInteractor: MovieDetailViewInteractorInterface {
     
     func getSectionsData() {
         if let movie = movieDetailViewConfiguration.movie {
-            self.presenter.updateSectionsData(MovieSectionDetailViewModel(movieViewModel: MovieViewModel(id: movie.id ?? Int.min, posterUrl: movie.posterUrl, rating: movie.rating, releaseDateWithDuration: releaseDateWithDuration, movieTitle: movie.title, releaseYear: movieReleaseYear, genres: movie.genres ?? []), overView: movie.overview, director: TableViewCellWithCollectionViewViewModel(id: nil, imageURL: movie.director?.pictureUrl, text: movie.director?.name), actors: movie.cast?.compactMap({TableViewCellWithCollectionViewViewModel(id: nil, imageURL: $0.pictureUrl, text: $0.name)}) ?? []))
+            self.presenter.updateSectionsData(MovieSectionDetailViewModel(movieViewModel: MovieViewModel(id: movie.id ?? Int.min, posterUrl: movie.posterUrl, rating: movie.rating, releaseDateWithDuration: releaseDateWithDuration, movieTitle: movie.title, releaseYear: movieReleaseYear, genres: movie.genres ?? []), overView: movie.overview, director: TableViewCellWithCollectionViewViewModel(id: nil, imageURL: movie.director?.pictureUrl, primaryText: movie.director?.name, secondaryText: nil), actors: movie.cast?.compactMap({TableViewCellWithCollectionViewViewModel(id: nil, imageURL: $0.pictureUrl, primaryText: $0.name, secondaryText: $0.character)}) ?? []))
         }
     }
     

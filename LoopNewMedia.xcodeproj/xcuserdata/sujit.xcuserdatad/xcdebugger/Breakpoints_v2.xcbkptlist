@@ -14,8 +14,8 @@
             filePath = "LoopNewMedia/Home/HomeViewInteractor.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "65"
-            endingLineNumber = "65"
+            startingLineNumber = "66"
+            endingLineNumber = "66"
             landmarkName = "fetchStaffPicks()"
             landmarkType = "7">
          </BreakpointContent>
@@ -162,6 +162,54 @@
             endingLineNumber = "39"
             landmarkName = "retriveBookMarks()"
             landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "92260030-EC0A-4568-A7BE-70DA88F2E926"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "LoopNewMedia/Home/HomeViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "79"
+            endingLineNumber = "79"
+            landmarkName = "tableView(_:cellForRowAt:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "92260030-EC0A-4568-A7BE-70DA88F2E926 - 5517e2a424004588"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "LoopNewMedia.HomeViewController.tableView(_: __C.UITableView, cellForRowAt: Foundation.IndexPath) -&gt; __C.UITableViewCell"
+                  moduleName = "LoopNewMedia"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/sujit/Desktop/LoopNewMedia/LoopNewMedia/Home/HomeViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "79"
+                  endingLineNumber = "79"
+                  offsetFromSymbolStart = "1345">
+               </Location>
+               <Location
+                  uuid = "92260030-EC0A-4568-A7BE-70DA88F2E926 - 8472ae783b9138d2"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #2 (LoopNewMedia.TableViewCellWithCollectionViewViewModel) -&gt; () in LoopNewMedia.HomeViewController.tableView(_: __C.UITableView, cellForRowAt: Foundation.IndexPath) -&gt; __C.UITableViewCell"
+                  moduleName = "LoopNewMedia"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/sujit/Desktop/LoopNewMedia/LoopNewMedia/Home/HomeViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "79"
+                  endingLineNumber = "79"
+                  offsetFromSymbolStart = "65">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

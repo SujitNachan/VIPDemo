@@ -10,7 +10,8 @@ import UIKit
 struct TableViewCellWithCollectionViewViewModel {
     let id: Int?
     let imageURL: String?
-    let text: String?
+    let primaryText: String?
+    let secondaryText: String?
 }
 
 struct CollectionViewConfiguation {

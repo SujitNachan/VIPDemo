@@ -16,18 +16,27 @@ class LoopMediaCollectioViewCell: UICollectionViewCell, ReusableView, NibLoadabl
     var celldata: TableViewCellWithCollectionViewViewModel? {
         didSet {
             imageView.loadImage(urlString: celldata?.imageURL)
-            if let text = celldata?.text {
-                label.text = text
-                let gradient = CAGradientLayer()
-                gradient.frame = imageView.frame
-                gradient.colors = [UIColor.clear.cgColor, UIColor.black.cgColor]
-                gradient.startPoint = CGPoint(x: 0.5, y: 0.0)
-                gradient.endPoint = CGPoint(x: 0.5, y: 1)
-                imageView.layer.addSublayer(gradient)
+            if let name = celldata?.primaryText,
+               let characterName = celldata?.secondaryText
+            {
+                label.text = name + "\n" + characterName
+                label.changeTextColor(ofText: characterName, with: .white.withAlphaComponent(0.6))
+                self.gardientEffect()
+            } else if let name = celldata?.primaryText {
+                label.text = name
             } else {
                 label.isHidden = true
             }
         }
+    }
+    
+    private func gardientEffect() {
+        let gradient = CAGradientLayer()
+        gradient.frame = imageView.frame
+        gradient.colors = [UIColor.clear.cgColor, UIColor.black.cgColor]
+        gradient.startPoint = CGPoint(x: 0.5, y: 0.0)
+        gradient.endPoint = CGPoint(x: 0.5, y: 1)
+        imageView.layer.addSublayer(gradient)
     }
     
     override func prepareForReuse() {

@@ -49,7 +49,7 @@ extension HomeViewInteractor: HomeViewInteractorInterface {
             switch result {
             case .success(let response):
                 self.movies = response.movies
-                self.presenter.update(movies: Array(self.movies?.compactMap({TableViewCellWithCollectionViewViewModel(id: $0.id, imageURL: $0.posterUrl, text: nil)}).prefix(upTo: 3) ?? []))
+                self.presenter.update(movies: Array(self.movies?.compactMap({TableViewCellWithCollectionViewViewModel(id: $0.id, imageURL: $0.posterUrl, primaryText: nil, secondaryText: nil)}).prefix(upTo: 3) ?? []))
             case .failure(let error):
                 self.presenter.showAlertView(message: error.localizedDescription)
             }
