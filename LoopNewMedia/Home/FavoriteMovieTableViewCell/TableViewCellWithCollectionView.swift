@@ -13,12 +13,25 @@ struct TableViewCellWithCollectionViewViewModel {
     let text: String?
 }
 
+struct CollectionViewConfiguation {
+    let footerSize: CGSize
+    let itemSize: CGSize
+    
+}
+
 class TableViewCellWithCollectionView: UITableViewCell, ReusableView, NibLoadableView {
     @IBOutlet private weak var collectionView: UICollectionView!
+    @IBOutlet private weak var collectionViewHeightConstraint: NSLayoutConstraint!
     
     var cellData: [TableViewCellWithCollectionViewViewModel]? {
         didSet {
             collectionView.reloadData()
+        }
+    }
+    
+    var collectionViewConfiguation: CollectionViewConfiguation? {
+        didSet {
+            collectionViewHeightConstraint.constant = collectionViewConfiguation?.itemSize.height ?? .zero
         }
     }
     
@@ -29,7 +42,6 @@ class TableViewCellWithCollectionView: UITableViewCell, ReusableView, NibLoadabl
         // Initialization code
         collectionView.register(LoopMediaCollectioViewCell.self)
         collectionView.registerSupplementaryView(YourFavoriteMovieCollectionFooterView.self, ofKind: UICollectionView.elementKindSectionFooter)
-
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -69,5 +81,15 @@ extension TableViewCellWithCollectionView: UICollectionViewDelegate {
         if let yourFavoriteMovieViewModel = cellData?[indexPath.row] {
             didSelectHandler?(yourFavoriteMovieViewModel)
         }
+    }
+}
+
+extension TableViewCellWithCollectionView: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return collectionViewConfiguation?.itemSize ?? .zero
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
+        return collectionViewConfiguation?.footerSize ?? .zero
     }
 }

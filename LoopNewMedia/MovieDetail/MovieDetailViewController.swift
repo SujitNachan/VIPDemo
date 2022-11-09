@@ -141,12 +141,14 @@ extension MovieDetailViewController: UITableViewDataSource, UITableViewDelegate 
             let directorCell: TableViewCellWithCollectionView = tableView.dequeueReusableCell(for: indexPath)
             if let director = self.movieSectionDetailViewModel?.director {
                 directorCell.cellData = [director]
+                directorCell.collectionViewConfiguation = CollectionViewConfiguation(footerSize: .zero, itemSize: CGSize(width: 114, height: 164))
             }
             return directorCell
             
         case MovieDetailViewSections.actors.rawValue:
             let actorCell: TableViewCellWithCollectionView = tableView.dequeueReusableCell(for: indexPath)
             actorCell.cellData = self.movieSectionDetailViewModel?.actors
+            actorCell.collectionViewConfiguation = CollectionViewConfiguation(footerSize: .zero, itemSize: CGSize(width: 114, height: 164))
             return actorCell
             
         default:
@@ -160,7 +162,7 @@ extension MovieDetailViewController: UITableViewDataSource, UITableViewDelegate 
         var title = ""
         switch section {
         case MovieDetailViewSections.overView.rawValue:
-            title = "OverView"
+            title = "Overview"
         case MovieDetailViewSections.director.rawValue:
             title = "Director"
         case MovieDetailViewSections.actors.rawValue:

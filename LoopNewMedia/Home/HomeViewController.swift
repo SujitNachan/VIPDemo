@@ -75,6 +75,7 @@ extension HomeViewController: UITableViewDataSource {
             
             let movieCell: TableViewCellWithCollectionView = tableView.dequeueReusableCell(for: indexPath)
             movieCell.cellData = self.yourFavoriteMovies
+            movieCell.collectionViewConfiguation = CollectionViewConfiguation(footerSize: CGSize(width: 196, height: 284), itemSize: CGSize(width: 196, height: 284))
             movieCell.didSelectHandler = { [unowned self] yourFavoriteMovie in
                 self.interactor?.movieDidSelect(yourFavoriteMovieViewModel: yourFavoriteMovie)
             }

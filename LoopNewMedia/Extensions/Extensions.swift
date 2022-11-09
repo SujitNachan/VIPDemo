@@ -295,3 +295,13 @@ extension Double {
         return ("\(Int(hr))h \(Int(min))m")
     }
 }
+
+extension UIView {
+    func applyBlurEffect(_ style: UIBlurEffect.Style) {
+        let blurEffect = UIBlurEffect(style: style)
+        let blurEffectView = UIVisualEffectView(effect: blurEffect)
+        blurEffectView.frame = bounds
+        blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        insertSubview(blurEffectView, at: 0)
+    }
+}

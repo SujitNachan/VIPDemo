@@ -56,14 +56,20 @@
                             </userDefinedRuntimeAttribute>
                         </userDefinedRuntimeAttributes>
                     </view>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="egr-oS-O1S">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="egr-oS-O1S">
                         <rect key="frame" x="144" y="362" width="32.5" height="17"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="17" id="Fdb-DB-Xa2"/>
+                        </constraints>
                         <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="14"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.598986359680591" colorSpace="custom" customColorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="LoR-ux-Mp6">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" text="Label" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LoR-ux-Mp6">
                         <rect key="frame" x="30" y="389" width="260" height="29"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="29" id="agE-pi-OP8"/>
+                        </constraints>
                         <fontDescription key="fontDescription" name="SFProDisplay-Bold" family="SF Pro Display" pointSize="24"/>
                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
@@ -71,7 +77,7 @@
                     <view contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="SiG-G7-y25" customClass="TagListView" customModule="LoopNewMedia" customModuleProvider="target">
                         <rect key="frame" x="30" y="430" width="260" height="28"/>
                         <constraints>
-                            <constraint firstAttribute="height" priority="250" constant="28" id="DQp-LL-RON"/>
+                            <constraint firstAttribute="height" priority="249" constant="28" id="DQp-LL-RON"/>
                         </constraints>
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="number" keyPath="marginY">
@@ -104,16 +110,21 @@
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
                 <outlet property="movieTitleLabel" destination="LoR-ux-Mp6" id="CIx-JD-7xI"/>
+                <outlet property="movieTitleLabelHeightConstraint" destination="agE-pi-OP8" id="d56-1P-g4L"/>
                 <outlet property="posterImageView" destination="h7i-pj-6I2" id="sjS-MA-UiY"/>
                 <outlet property="posterImageViewContainer" destination="4Uu-7X-Yuf" id="qZc-8f-tRA"/>
                 <outlet property="releaseDateLabel" destination="egr-oS-O1S" id="PcQ-v2-4Zp"/>
                 <outlet property="starView" destination="aJJ-8g-BGE" id="uRf-q5-ncr"/>
                 <outlet property="tagListView" destination="SiG-G7-y25" id="SR9-o2-jBa"/>
-                <outlet property="tagListViewHeightConstraint" destination="DQp-LL-RON" id="mh5-G1-ksH"/>
             </connections>
             <point key="canvasLocation" x="137.68115942028987" y="206.25"/>
         </tableViewCell>
     </objects>
+    <designables>
+        <designable name="SiG-G7-y25">
+            <size key="intrinsicContentSize" width="260" height="16"/>
+        </designable>
+    </designables>
     <resources>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

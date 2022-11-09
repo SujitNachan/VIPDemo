@@ -16,9 +16,23 @@ class LoopMediaCollectioViewCell: UICollectionViewCell, ReusableView, NibLoadabl
     var celldata: TableViewCellWithCollectionViewViewModel? {
         didSet {
             imageView.loadImage(urlString: celldata?.imageURL)
-            label.isHidden = (celldata?.text?.isEmpty ?? false)
-            label.text = celldata?.text
+            if let text = celldata?.text {
+                label.text = text
+                let gradient = CAGradientLayer()
+                gradient.frame = imageView.frame
+                gradient.colors = [UIColor.clear.cgColor, UIColor.black.cgColor]
+                gradient.startPoint = CGPoint(x: 0.5, y: 0.0)
+                gradient.endPoint = CGPoint(x: 0.5, y: 1)
+                imageView.layer.addSublayer(gradient)
+            } else {
+                label.isHidden = true
+            }
         }
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        imageView.layer.sublayers?.removeAll()
     }
     
     override func awakeFromNib() {
@@ -28,6 +42,7 @@ class LoopMediaCollectioViewCell: UICollectionViewCell, ReusableView, NibLoadabl
     
     override func layoutSubviews() {
         super.layoutSubviews()
+        containerView.layer.shadowColor = nil
         containerView.layer.cornerRadius = 14
         containerView.layer.shadowColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.16).cgColor
         containerView.layer.shadowOffset = CGSize(width: -2.0, height: -2.0)
