@@ -48,7 +48,7 @@ class StarsView: UIView {
         for i in 1...5 {
             let star = starLayer(full: true)
             if rating >= Double(i) {
-                star.fillColor = tintColor.cgColor
+                star.fillColor = #colorLiteral(red: 0.9998236299, green: 0.6797295809, blue: 0, alpha: 1).cgColor
             } else {
                 star.fillColor = defaultStarColor.cgColor
             }

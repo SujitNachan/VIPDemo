@@ -24,7 +24,7 @@ class StaffPicksTableViewCell: UITableViewCell, ReusableView, NibLoadableView {
         }
     }
     
-    var bookmarkHandler: (() -> ())?
+    var bookmarkHandler: (() -> Void)?
     
     @objc private func bookmarkImageTapped(tapGestureRecognizer: UITapGestureRecognizer) {
         bookmarkHandler?()

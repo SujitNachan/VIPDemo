@@ -31,13 +31,17 @@ extension HomeViewInteractor: HomeViewInteractorInterface {
     
     func movieDidSelect(yourFavoriteMovieViewModel: TableViewCellWithCollectionViewViewModel) {
         if let movie = movies?.filter({$0.id == yourFavoriteMovieViewModel.id}).first {
-            self.router.navigateToMovieDetailScreen(movie: movie)
+            self.router.navigateToMovieDetailScreen(movie: movie, bookmarkHandler: nil)
         }
     }
     
     func staffPicksDidSelect(staffPicksViewModel: StaffPicksViewModel) {
         if let movie = staffPicks?.filter({$0.id == staffPicksViewModel.id}).first {
-            self.router.navigateToMovieDetailScreen(movie: movie)
+            self.router.navigateToMovieDetailScreen(movie: movie){ [unowned self] in
+                if let index = staffPicks?.firstIndex(where: {$0.id == staffPicksViewModel.id}) {
+                    self.presenter.bookmarkStaffPicks(at: index)
+                }
+            }
         }
     }
     

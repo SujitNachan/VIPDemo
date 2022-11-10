@@ -11,7 +11,8 @@ protocol Configurator {
     func configViewController() -> UIViewController
 }
 
-class HomeConfigurator: Configurator {
+struct HomeConfigurator: Configurator {
+    
     func configViewController() -> UIViewController {
         let viewController = HomeViewController()
         let homeViewPresenter = HomeViewPresenter()

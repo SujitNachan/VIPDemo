@@ -20,7 +20,6 @@ class MovieOverviewTableViewCell: UITableViewCell, ReusableView {
         backgroundColor = .white
         textLabel?.lineBreakMode = .byWordWrapping
         textLabel?.numberOfLines = 0
-        textLabel?.text = "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum."
         textLabel?.textColor = .black.withAlphaComponent(0.7)
         textLabel?.font = UIFont.SFProDisplay(.regular, size: 16)
         textLabel?.textAlignment = .justified
@@ -33,6 +32,14 @@ class MovieOverviewTableViewCell: UITableViewCell, ReusableView {
             textLabel!.trailingAnchor.constraint(
                 equalTo: contentView.trailingAnchor,
                 constant: -30
+            ),
+            textLabel!.topAnchor.constraint(
+                equalTo: contentView.topAnchor,
+                constant: 5
+            ),
+            textLabel!.bottomAnchor.constraint(
+                equalTo: contentView.bottomAnchor,
+                constant: -5
             )
         ])
     }

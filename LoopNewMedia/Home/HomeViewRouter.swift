@@ -12,11 +12,9 @@ class HomeViewRouter {
 }
 
 extension HomeViewRouter: HomeViewRouterInterface {
-    func navigateToMovieDetailScreen(movie: Movie) {
-        let movieDetailConfigurator = MovieDetailViewConfigurator(movie: movie)
-        movieDetailConfigurator.dimissHandler = { [weak self] in
-            print("dismissHandler")
-        }
+    func navigateToMovieDetailScreen(movie: Movie, bookmarkHandler: (() -> Void)?) {
+        let movieDetailConfigurator = MovieDetailViewConfigurator(movie: movie, bookmarkHandler: bookmarkHandler)
         self.viewController?.present(UINavigationController(rootViewController: movieDetailConfigurator.configViewController()), animated: true)
+        
     }
 }

@@ -38,5 +38,5 @@ protocol HomeViewPresenterInterface {
 }
 
 protocol HomeViewRouterInterface {
-    func navigateToMovieDetailScreen(movie: Movie)
+    func navigateToMovieDetailScreen(movie: Movie, bookmarkHandler: (() -> Void)?)
 }

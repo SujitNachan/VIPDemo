@@ -20,6 +20,7 @@ struct MovieSectionDetailViewModel {
     let overView: String?
     let director: TableViewCellWithCollectionViewViewModel?
     let actors: [TableViewCellWithCollectionViewViewModel]
+    let keyFacts: KeyFactsTableViewCellConfigurator
 }
 
 class MovieDetailViewController: UIViewController {
@@ -45,6 +46,7 @@ class MovieDetailViewController: UIViewController {
         setupNavigationBar()
         setupUI()
         interactor?.getSectionsData()
+        updateBookmarkImage()
     }
     
     private func setupNavigationBar() {
@@ -70,7 +72,8 @@ class MovieDetailViewController: UIViewController {
     }
     
     private func setupUI() {
-        movieTableView = UITableView(frame: self.view.bounds)
+        let tableViewFrame = CGRect(origin: CGPoint(x: 0, y: 0 ), size: CGSize(width: self.view.bounds.width, height: self.view.bounds.height - (self.navigationController?.navigationBar.bounds.height ?? 0)))
+        movieTableView = UITableView(frame: tableViewFrame)
         movieTableView?.separatorStyle = .none
         if let movieTableView = movieTableView {
             self.view.addSubview(movieTableView)
@@ -81,6 +84,7 @@ class MovieDetailViewController: UIViewController {
         movieTableView?.register(MoviePosterTitleTableViewCell.self)
         movieTableView?.register(MovieOverviewTableViewCell.self)
         movieTableView?.register(TableViewCellWithCollectionView.self)
+        movieTableView?.register(KeyFactsTableViewCell.self)
     }
     
     @objc private func closeButtonClicked() {
@@ -93,15 +97,17 @@ class MovieDetailViewController: UIViewController {
         }
     }
     
-    private func updateBookmarkImage(id: Int) {
-        bookmarkButton.setImage(UIImage(named: UserDefaultDataManager.shared.retriveBookMarks().contains(id) ? "BookmarkFill" : "BookmarkBlack"), for: .normal)
+    private func updateBookmarkImage() {
+        if let id = movieSectionDetailViewModel?.movieViewModel?.id {
+            bookmarkButton.setImage(UIImage(named: UserDefaultDataManager.shared.retriveBookMarks().contains(id) ? "BookmarkFill" : "BookmarkBlack"), for: .normal)
+        }
     }
 }
 
 extension MovieDetailViewController: MovieDetailViewControllerInterface {
     func updateBookmarkButton(_ movieViewModel: MovieViewModel) {
         UserDefaultDataManager.shared.retriveBookMarks().contains(movieViewModel.id) ? UserDefaultDataManager.shared.removeBookmark(id: movieViewModel.id) : UserDefaultDataManager.shared.addBookmark(id: movieViewModel.id)
-        updateBookmarkImage(id: movieViewModel.id)
+        updateBookmarkImage()
     }
     
     func updateSectionsData(_ movieSectionDetailViewModel: MovieSectionDetailViewModel) {
@@ -136,7 +142,6 @@ extension MovieDetailViewController: UITableViewDataSource, UITableViewDelegate 
             let moviePosterCell: MoviePosterTitleTableViewCell = tableView.dequeueReusableCell(for: indexPath)
             moviePosterCell.cellData = self.movieSectionDetailViewModel?.movieViewModel
             return moviePosterCell
-//        case MovieDetailViewSections.overView.rawValue:
         case MovieDetailViewSections.director.rawValue:
             let directorCell: TableViewCellWithCollectionView = tableView.dequeueReusableCell(for: indexPath)
             if let director = self.movieSectionDetailViewModel?.director {
@@ -150,7 +155,10 @@ extension MovieDetailViewController: UITableViewDataSource, UITableViewDelegate 
             actorCell.cellData = self.movieSectionDetailViewModel?.actors
             actorCell.collectionViewConfiguation = CollectionViewConfiguation(footerSize: .zero, itemSize: CGSize(width: 114, height: 164))
             return actorCell
-            
+        case MovieDetailViewSections.keyFacts.rawValue:
+            let keyFactsCell: KeyFactsTableViewCell = tableView.dequeueReusableCell(for: indexPath)
+            keyFactsCell.configuration = self.movieSectionDetailViewModel?.keyFacts
+            return keyFactsCell
         default:
             let overViewCell: MovieOverviewTableViewCell = tableView.dequeueReusableCell(for: indexPath)
             overViewCell.cellData = movieSectionDetailViewModel?.overView
