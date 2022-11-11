@@ -40,12 +40,12 @@ class LoopMediaCollectioViewCell: UICollectionViewCell, ReusableView, NibLoadabl
         gradient.colors = [UIColor.clear.cgColor, UIColor.black.cgColor]
         gradient.startPoint = CGPoint(x: 0.5, y: 0.0)
         gradient.endPoint = CGPoint(x: 0.5, y: 1)
+        imageView.layer.sublayers?.removeAll()
         imageView.layer.addSublayer(gradient)
     }
     
     override func prepareForReuse() {
         super.prepareForReuse()
-        imageView.layer.sublayers?.removeAll()
     }
     
     override func awakeFromNib() {

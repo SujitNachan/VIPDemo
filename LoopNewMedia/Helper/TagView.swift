@@ -463,9 +463,6 @@ open class TagListView: UIView {
         if #available(iOS 10.0, tvOS 10.0, *) {
             isRtl = effectiveUserInterfaceLayoutDirection == .rightToLeft
         }
-        else if #available(iOS 9.0, *) {
-            isRtl = UIView.userInterfaceLayoutDirection(for: semanticContentAttribute) == .rightToLeft
-        }
         else if let shared = UIApplication.value(forKey: "sharedApplication") as? UIApplication {
             isRtl = shared.userInterfaceLayoutDirection == .leftToRight
         }
