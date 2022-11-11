@@ -7,7 +7,7 @@
 
 import UIKit
 
-class MovieDetailViewConfigurator: Configurator {
+struct MovieDetailViewConfigurator: Configurator {
     private let movie: Movie
     private let bookmarkHandler: (() -> Void)?
     

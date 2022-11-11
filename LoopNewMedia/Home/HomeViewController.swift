@@ -81,16 +81,10 @@ extension HomeViewController: UITableViewDataSource {
             }
             return movieCell
         }
-        
-        
     }
 }
 
 extension HomeViewController: UITableViewDelegate {
-    @objc func searchButtonClicked() {
-        print("navigate to search screen")
-    }
-    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.section == HomeViewSections.ourStaff.rawValue {
             interactor?.staffPicksDidSelect(staffPicksViewModel: staffPicks[indexPath.row])
@@ -103,9 +97,9 @@ extension HomeViewController: UITableViewDelegate {
         }
         switch section {
         case HomeViewSections.searchButton.rawValue:
-            let headerView = HeaderViewWithButton(frame: CGRect(x: 0, y: 0, width: tableView.bounds.width, height: 48)).with { [weak self] headerViewObj in
-                guard let self = self else { return }
-                headerViewObj.searchButton.addTarget(self, action: #selector(self.searchButtonClicked), for: .touchUpInside)
+            let headerView = HeaderViewWithButton(frame: CGRect(x: 0, y: 0, width: tableView.bounds.width, height: 48))
+            headerView.searchButtonTapped = { [unowned self] in
+                
             }
             return headerView
         case HomeViewSections.yourFavorites.rawValue:

@@ -9,7 +9,9 @@ import UIKit
 
 class HeaderViewWithButton: UIView {
     private var height = 48
-    var searchButton: UIButton!
+    private var searchButton: UIButton!
+    
+    var searchButtonTapped: (() -> Void)?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -27,8 +29,13 @@ class HeaderViewWithButton: UIView {
         searchButton.contentVerticalAlignment = .fill
         searchButton.imageEdgeInsets = UIEdgeInsets(top: 14, left: 14, bottom: 14, right: 14)
         searchButton.backgroundColor = .white
-        searchButton.setShadow(radius: 12)
+        searchButton.setShadow(shadowRadius: 12, cornerRadius: 12)
+        searchButton.addTarget(self, action: #selector(self.searchButtonClicked), for: .touchUpInside)
         self.addSubview(searchButton)
+    }
+    
+    @objc private func searchButtonClicked() {
+        searchButtonTapped?()
     }
 }
 

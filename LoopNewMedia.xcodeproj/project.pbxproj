@@ -55,6 +55,8 @@
 		81FFD220291C105D009DEB41 /* KeyFactCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81FFD21E291C105D009DEB41 /* KeyFactCollectionViewCell.swift */; };
 		81FFD221291C105D009DEB41 /* KeyFactCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 81FFD21F291C105D009DEB41 /* KeyFactCollectionViewCell.xib */; };
 		81FFD223291D0D52009DEB41 /* DynamicHeightCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81FFD222291D0D52009DEB41 /* DynamicHeightCollectionView.swift */; };
+		81FFD225291E14FB009DEB41 /* ViewControllerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81FFD224291E14FB009DEB41 /* ViewControllerExtensions.swift */; };
+		81FFD227291E1550009DEB41 /* ViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81FFD226291E1550009DEB41 /* ViewExtensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -127,6 +129,8 @@
 		81FFD21E291C105D009DEB41 /* KeyFactCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyFactCollectionViewCell.swift; sourceTree = "<group>"; };
 		81FFD21F291C105D009DEB41 /* KeyFactCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = KeyFactCollectionViewCell.xib; sourceTree = "<group>"; };
 		81FFD222291D0D52009DEB41 /* DynamicHeightCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicHeightCollectionView.swift; sourceTree = "<group>"; };
+		81FFD224291E14FB009DEB41 /* ViewControllerExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerExtensions.swift; sourceTree = "<group>"; };
+		81FFD226291E1550009DEB41 /* ViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewExtensions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -177,6 +181,8 @@
 			isa = PBXGroup;
 			children = (
 				811CD6B2291103C900700324 /* Extensions.swift */,
+				81FFD224291E14FB009DEB41 /* ViewControllerExtensions.swift */,
+				81FFD226291E1550009DEB41 /* ViewExtensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -510,6 +516,8 @@
 				81BFA22629102EFD00A6E1E7 /* HomeViewInteractor.swift in Sources */,
 				81FFD21B291C0E41009DEB41 /* KeyFactsTableViewCell.swift in Sources */,
 				81BFA213290FFC2E00A6E1E7 /* LoopMediaCollectioViewCell.swift in Sources */,
+				81FFD227291E1550009DEB41 /* ViewExtensions.swift in Sources */,
+				81FFD225291E14FB009DEB41 /* ViewControllerExtensions.swift in Sources */,
 				81F7C9D429156DD300CE6123 /* MoviePosterTitleTableViewCell.swift in Sources */,
 				81BFA1DE290FF96B00A6E1E7 /* AppDelegate.swift in Sources */,
 				81BFA22429102D4500A6E1E7 /* Service.swift in Sources */,

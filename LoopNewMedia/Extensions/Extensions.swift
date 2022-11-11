@@ -7,27 +7,6 @@
 
 import UIKit
 
-extension UIViewController {
-    func showAlertViewWithStyle(title: String, message: String, actionTitles: [String], style: UIAlertController.Style = .alert, handler: [((UIAlertAction) -> Void)?]) {
-        // create the alert
-        let alert = UIAlertController(title: title, message: message, preferredStyle: style)
-        for (index, title) in actionTitles.enumerated() {
-            // add an action (button)
-            if !handler.isEmpty {
-                alert.addAction(UIAlertAction(title: title, style: .default, handler: handler[index]))
-            } else {
-                alert.addAction(UIAlertAction(title: title, style: .default, handler: nil))
-            }
-        }
-        if style == .actionSheet {
-        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-        }
-        // show the alert
-        self.showDetailViewController(alert, sender: self)
-    }
-}
-
-
 protocol ReusableView: AnyObject {
     static var defaultReuseIdentifier: String { get }
 }
@@ -255,17 +234,6 @@ extension UIFont {
 
 }
 
-extension UIView {
-    func setShadow(shadowColor: CGColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.16).cgColor, shadowOffset: CGSize = CGSize(width: 0.0, height: 2.0), radius: CGFloat = 18.0) {
-        layer.shadowColor = shadowColor
-        layer.shadowOffset = shadowOffset
-        layer.shadowOpacity = 1.0
-        layer.shadowRadius = radius
-        layer.masksToBounds = false
-        layer.cornerRadius = radius
-    }
-}
-
 extension String {
     var getDate: Date? {
         let dateFormatter = DateFormatter()
@@ -293,15 +261,5 @@ extension Double {
         let (hr,  minf) = modf(self / 3600)
         let (min, _) = modf(60 * minf)
         return ("\(Int(hr))h \(Int(min))m")
-    }
-}
-
-extension UIView {
-    func applyBlurEffect(_ style: UIBlurEffect.Style) {
-        let blurEffect = UIBlurEffect(style: style)
-        let blurEffectView = UIVisualEffectView(effect: blurEffect)
-        blurEffectView.frame = bounds
-        blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        insertSubview(blurEffectView, at: 0)
     }
 }

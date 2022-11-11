@@ -52,12 +52,7 @@ class LoopMediaCollectioViewCell: UICollectionViewCell, ReusableView, NibLoadabl
     override func layoutSubviews() {
         super.layoutSubviews()
         containerView.layer.shadowColor = nil
-        containerView.layer.cornerRadius = 14
-        containerView.layer.shadowColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.16).cgColor
-        containerView.layer.shadowOffset = CGSize(width: -2.0, height: -2.0)
-        containerView.layer.shadowRadius = 4.0
-        containerView.layer.shadowOpacity = 1
-          
+        containerView.setShadow(shadowOffset: CGSize(width: -2.0, height: -2.0), shadowRadius: 4, cornerRadius: 14)
         imageView.layer.cornerRadius = 14
         imageView.clipsToBounds = true
     }
