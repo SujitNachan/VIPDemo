@@ -71,11 +71,11 @@ extension HomeViewController: UITableViewDataSource {
                 self.interactor?.bookmarkStaffPicks(at: indexPath.row)
             }
             return staffCell
-        default:
             
+        default:
             let movieCell: TableViewCellWithCollectionView = tableView.dequeueReusableCell(for: indexPath)
-            movieCell.cellData = self.yourFavoriteMovies
-            movieCell.collectionViewConfiguation = CollectionViewConfiguation(footerSize: CGSize(width: 196, height: 284), itemSize: CGSize(width: 196, height: 284))
+            let itemSize = CGSize(width: 196, height: 284)
+            movieCell.configuation = TableViewCellWithCollectionViewConfigurator(cellData: self.yourFavoriteMovies, footerSize: itemSize, itemSize: itemSize)
             movieCell.didSelectHandler = { [unowned self] yourFavoriteMovie in
                 self.interactor?.movieDidSelect(yourFavoriteMovieViewModel: yourFavoriteMovie)
             }
@@ -102,12 +102,15 @@ extension HomeViewController: UITableViewDelegate {
                 
             }
             return headerView
+            
         case HomeViewSections.yourFavorites.rawValue:
             let headerWithLabel = HeaderViewWithLabel(title: "YOUR FAVORITES", titleFont: UIFont.SFProDisplay(.regular, size: 12), textToChange: "FAVORITES", fontToChange: boldfont)
             return headerWithLabel
+            
         case HomeViewSections.ourStaff.rawValue:
             let headerWithLabel = HeaderViewWithLabel(title: "OUR STAFF PICKS", titleColor: .white, titleFont: UIFont.SFProDisplay(.regular, size: 12), textToChange: "STAFF PICKS", fontToChange: boldfont)
             return headerWithLabel
+            
         default:
             break
         }

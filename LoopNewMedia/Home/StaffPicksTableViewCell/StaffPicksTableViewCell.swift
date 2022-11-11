@@ -16,11 +16,7 @@ class StaffPicksTableViewCell: UITableViewCell, ReusableView, NibLoadableView {
     
     var celldata: StaffPicksViewModel? {
         didSet {
-            posterImageView?.loadImage(urlString: celldata?.posterImageURL)
-            movieTitleLabel?.text = celldata?.movieTitle
-            movieReleaseYearLabel?.text = celldata?.movieReleaseYear
-            movieRatingView?.rating = celldata?.ratings ?? 0
-            bookmarkImageView?.image = (UserDefaultDataManager.shared.retriveBookMarks().contains(celldata?.id ?? 0) ) ? UIImage(named: "BookmarkFill") : UIImage(named: "Bookmark")
+            self.configureCell()
         }
     }
     
@@ -39,11 +35,13 @@ class StaffPicksTableViewCell: UITableViewCell, ReusableView, NibLoadableView {
         
         
     }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+    
+    private func configureCell() {
+        posterImageView?.loadImage(urlString: celldata?.posterImageURL)
+        movieTitleLabel?.text = celldata?.movieTitle
+        movieReleaseYearLabel?.text = celldata?.movieReleaseYear
+        movieRatingView?.rating = celldata?.ratings ?? 0
+        bookmarkImageView?.image = (UserDefaultDataManager.shared.retriveBookMarks().contains(celldata?.id ?? 0) ) ? UIImage(named: "BookmarkFill") : UIImage(named: "Bookmark")
     }
     
 }

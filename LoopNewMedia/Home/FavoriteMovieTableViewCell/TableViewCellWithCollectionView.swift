@@ -14,25 +14,26 @@ struct TableViewCellWithCollectionViewViewModel {
     let secondaryText: String?
 }
 
-struct CollectionViewConfiguation {
-    let footerSize: CGSize
-    let itemSize: CGSize
-    
+protocol TableViewCellWithCollectionViewConfiguration {
+    var cellData: [TableViewCellWithCollectionViewViewModel]? { get set }
+    var footerSize: CGSize { get set }
+    var itemSize: CGSize { get set }
+}
+
+struct TableViewCellWithCollectionViewConfigurator: TableViewCellWithCollectionViewConfiguration {
+    var cellData: [TableViewCellWithCollectionViewViewModel]?
+    var footerSize: CGSize
+    var itemSize: CGSize
 }
 
 class TableViewCellWithCollectionView: UITableViewCell, ReusableView, NibLoadableView {
     @IBOutlet private weak var collectionView: UICollectionView!
     @IBOutlet private weak var collectionViewHeightConstraint: NSLayoutConstraint!
     
-    var cellData: [TableViewCellWithCollectionViewViewModel]? {
+    var configuation: TableViewCellWithCollectionViewConfiguration? {
         didSet {
             collectionView.reloadData()
-        }
-    }
-    
-    var collectionViewConfiguation: CollectionViewConfiguation? {
-        didSet {
-            collectionViewHeightConstraint.constant = collectionViewConfiguation?.itemSize.height ?? .zero
+            collectionViewHeightConstraint.constant = configuation?.itemSize.height ?? .zero
         }
     }
     
@@ -55,12 +56,12 @@ class TableViewCellWithCollectionView: UITableViewCell, ReusableView, NibLoadabl
 
 extension TableViewCellWithCollectionView: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return cellData?.count ?? 0
+        return configuation?.cellData?.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell: LoopMediaCollectioViewCell = collectionView.dequeueReusableCell(for: indexPath)
-        if let celldata = cellData {
+        if let celldata = configuation?.cellData {
             cell.celldata = celldata[indexPath.row]
         }
         return cell
@@ -79,7 +80,7 @@ extension TableViewCellWithCollectionView: UICollectionViewDelegate {
             }
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if let yourFavoriteMovieViewModel = cellData?[indexPath.row] {
+        if let yourFavoriteMovieViewModel = configuation?.cellData?[indexPath.row] {
             didSelectHandler?(yourFavoriteMovieViewModel)
         }
     }
@@ -87,10 +88,10 @@ extension TableViewCellWithCollectionView: UICollectionViewDelegate {
 
 extension TableViewCellWithCollectionView: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return collectionViewConfiguation?.itemSize ?? .zero
+        return configuation?.itemSize ?? .zero
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
-        return collectionViewConfiguation?.footerSize ?? .zero
+        return configuation?.footerSize ?? .zero
     }
 }

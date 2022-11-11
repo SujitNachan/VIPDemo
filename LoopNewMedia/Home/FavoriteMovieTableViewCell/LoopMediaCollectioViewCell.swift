@@ -15,18 +15,22 @@ class LoopMediaCollectioViewCell: UICollectionViewCell, ReusableView, NibLoadabl
     
     var celldata: TableViewCellWithCollectionViewViewModel? {
         didSet {
-            imageView.loadImage(urlString: celldata?.imageURL)
-            if let name = celldata?.primaryText,
-               let characterName = celldata?.secondaryText
-            {
-                label.text = name + "\n" + characterName
-                label.changeTextColor(ofText: characterName, with: .white.withAlphaComponent(0.6))
-                self.gardientEffect()
-            } else if let name = celldata?.primaryText {
-                label.text = name
-            } else {
-                label.isHidden = true
-            }
+            self.configureCell()
+        }
+    }
+    
+    private func configureCell() {
+        imageView.loadImage(urlString: celldata?.imageURL)
+        if let name = celldata?.primaryText,
+           let characterName = celldata?.secondaryText
+        {
+            label.text = name + "\n" + characterName
+            label.changeTextColor(ofText: characterName, with: .white.withAlphaComponent(0.6))
+            self.gardientEffect()
+        } else if let name = celldata?.primaryText {
+            label.text = name
+        } else {
+            label.isHidden = true
         }
     }
     

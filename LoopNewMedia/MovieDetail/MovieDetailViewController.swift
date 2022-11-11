@@ -137,28 +137,29 @@ extension MovieDetailViewController: UITableViewDataSource, UITableViewDelegate 
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let itemSize = CGSize(width: 114, height: 164)
         switch indexPath.section {
         case MovieDetailViewSections.poster.rawValue:
             let moviePosterCell: MoviePosterTitleTableViewCell = tableView.dequeueReusableCell(for: indexPath)
             moviePosterCell.cellData = self.movieSectionDetailViewModel?.movieViewModel
             return moviePosterCell
+            
         case MovieDetailViewSections.director.rawValue:
             let directorCell: TableViewCellWithCollectionView = tableView.dequeueReusableCell(for: indexPath)
-            if let director = self.movieSectionDetailViewModel?.director {
-                directorCell.cellData = [director]
-                directorCell.collectionViewConfiguation = CollectionViewConfiguation(footerSize: .zero, itemSize: CGSize(width: 114, height: 164))
-            }
+            guard let director = self.movieSectionDetailViewModel?.director else { return directorCell }
+            directorCell.configuation = TableViewCellWithCollectionViewConfigurator(cellData: [director], footerSize: .zero, itemSize: itemSize)
             return directorCell
             
         case MovieDetailViewSections.actors.rawValue:
             let actorCell: TableViewCellWithCollectionView = tableView.dequeueReusableCell(for: indexPath)
-            actorCell.cellData = self.movieSectionDetailViewModel?.actors
-            actorCell.collectionViewConfiguation = CollectionViewConfiguation(footerSize: .zero, itemSize: CGSize(width: 114, height: 164))
+            actorCell.configuation = TableViewCellWithCollectionViewConfigurator(cellData: self.movieSectionDetailViewModel?.actors, footerSize: .zero, itemSize: itemSize)
             return actorCell
+            
         case MovieDetailViewSections.keyFacts.rawValue:
             let keyFactsCell: KeyFactsTableViewCell = tableView.dequeueReusableCell(for: indexPath)
             keyFactsCell.configuration = self.movieSectionDetailViewModel?.keyFacts
             return keyFactsCell
+            
         default:
             let overViewCell: MovieOverviewTableViewCell = tableView.dequeueReusableCell(for: indexPath)
             overViewCell.cellData = movieSectionDetailViewModel?.overView
