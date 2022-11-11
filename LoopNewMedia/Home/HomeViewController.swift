@@ -33,7 +33,7 @@ class HomeViewController: UIViewController {
     }
     
     private func setupUI() {
-        movieTableView = UITableView(frame: self.view.bounds)
+        movieTableView = UITableView(frame: self.view.bounds, style: .grouped)
         movieTableView?.separatorStyle = .none
         if let movieTableView = movieTableView {
             self.view.addSubview(movieTableView)

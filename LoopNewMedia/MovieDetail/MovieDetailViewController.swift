@@ -73,7 +73,7 @@ class MovieDetailViewController: UIViewController {
     
     private func setupUI() {
         let tableViewFrame = CGRect(origin: CGPoint(x: 0, y: 0 ), size: CGSize(width: self.view.bounds.width, height: self.view.bounds.height - (self.navigationController?.navigationBar.bounds.height ?? 0)))
-        movieTableView = UITableView(frame: tableViewFrame)
+        movieTableView = UITableView(frame: tableViewFrame, style: .grouped)
         movieTableView?.separatorStyle = .none
         if let movieTableView = movieTableView {
             self.view.addSubview(movieTableView)
