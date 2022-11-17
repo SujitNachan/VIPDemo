@@ -32,6 +32,11 @@ class HomeViewController: UIViewController {
         navigationController?.navigationBar.isHidden = true
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        navigationController?.navigationBar.isHidden = false
+    }
+    
     private func setupUI() {
         movieTableView = UITableView(frame: self.view.bounds, style: .grouped)
         movieTableView?.separatorStyle = .none
@@ -99,7 +104,7 @@ extension HomeViewController: UITableViewDelegate {
         case HomeViewSections.searchButton.rawValue:
             let headerView = HeaderViewWithButton(frame: CGRect(x: 0, y: 0, width: tableView.bounds.width, height: 48))
             headerView.searchButtonTapped = { [unowned self] in
-                
+                self.interactor?.routeToSearchScreen()
             }
             return headerView
             

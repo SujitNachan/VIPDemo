@@ -15,4 +15,14 @@ struct Movie : Codable {
 	let budget : Int?
 	let language : String?
 	let genres : [String]?
+    
+    var releaseYear: String? {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "YYYY-MM-DD"
+        if let date = dateFormatter.date(from: releaseDate ?? "") {
+            dateFormatter.dateFormat = "YYYY"
+            return dateFormatter.string(from: date)
+        }
+        return nil
+    }
 }

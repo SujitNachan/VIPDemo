@@ -26,6 +26,7 @@ protocol HomeViewInteractorInterface {
     func staffPicksDidSelect(staffPicksViewModel: StaffPicksViewModel)
     func bookmarkStaffPicks(at index: Int)
     func cancelDataTask()
+    func routeToSearchScreen()
 }
 
 protocol HomeViewPresenterInterface {
@@ -39,4 +40,5 @@ protocol HomeViewPresenterInterface {
 
 protocol HomeViewRouterInterface {
     func navigateToMovieDetailScreen(movie: Movie, bookmarkHandler: (() -> Void)?)
+    func navigateToSearchMovieScreen(movies: [Movie])
 }

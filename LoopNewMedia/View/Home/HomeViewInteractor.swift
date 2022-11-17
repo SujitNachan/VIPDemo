@@ -22,6 +22,10 @@ class HomeViewInteractor {
 }
 
 extension HomeViewInteractor: HomeViewInteractorInterface {
+    func routeToSearchScreen() {
+        router.navigateToSearchMovieScreen(movies: self.movies ?? [])
+    }
+    
     func bookmarkStaffPicks(at index: Int) {
         if let id = staffPicks?[index].id {
             UserDefaultDataManager.shared.retriveBookMarks().contains(id) ? UserDefaultDataManager.shared.removeBookmark(id: id) : UserDefaultDataManager.shared.addBookmark(id: id)
@@ -71,20 +75,10 @@ extension HomeViewInteractor: HomeViewInteractorInterface {
             switch result {
             case .success(let response):
                 self.staffPicks = response.movies
-                self.presenter.update(staffPicks: self.staffPicks?.compactMap({ StaffPicksViewModel.init(id: $0.id, posterImageURL: $0.posterUrl, movieTitle: $0.title, movieReleaseYear: self.getFormattedReleaseDate(movieReleaseYear: $0.releaseDate ?? ""), ratings: $0.rating)}) ?? [])
+                self.presenter.update(staffPicks: self.staffPicks?.compactMap({ StaffPicksViewModel.init(id: $0.id, posterImageURL: $0.posterUrl, movieTitle: $0.title, movieReleaseYear: $0.releaseYear, ratings: $0.rating)}) ?? [])
             case .failure(let error):
                 self.presenter.showAlertView(message: error.localizedDescription)
             }
         })
-    }
-    
-    func getFormattedReleaseDate(movieReleaseYear: String) -> String? {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "YYYY-MM-DD"
-        if let date = dateFormatter.date(from: movieReleaseYear) {
-            dateFormatter.dateFormat = "YYYY"
-            return dateFormatter.string(from: date)
-        }
-        return nil
     }
 }
