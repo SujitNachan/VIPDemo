@@ -7,11 +7,18 @@
 
 import UIKit
 
+
+
 class SearchMovieViewController: UIViewController {
+    private var ratingCollectionView: UICollectionView?
     private var movieTableView: UITableView?
     private var searchBar: UISearchBar?
     private var interactor: SearchMovieViewInteractorInterface?
     private var movies: [StaffPicksViewModel] = []
+    private var ratings: [RatingViewModel] = []
+    private var navigationBarHeight: CGFloat {
+        navigationController?.navigationBar.frame.maxY ?? 80
+    }
     
     init(interactor: SearchMovieViewInteractorInterface) {
         self.interactor = interactor
@@ -27,12 +34,11 @@ class SearchMovieViewController: UIViewController {
         self.view.backgroundColor = #colorLiteral(red: 0.1000831202, green: 0.1472782791, blue: 0.1932071447, alpha: 1)
         setupUI()
         interactor?.getMovies()
-        // Do any additional setup after loading the view.
+        interactor?.getRatings()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
         navigationItem.setHidesBackButton(true, animated: true)
     }
     
@@ -42,7 +48,18 @@ class SearchMovieViewController: UIViewController {
     }
     
     private func setupUI() {
-        let tableViewFrame = CGRect(origin: CGPoint(x: 0, y: 0 ), size: CGSize(width: self.view.bounds.width, height: self.view.bounds.height - (self.navigationController?.navigationBar.bounds.height ?? 0)))
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .horizontal
+        ratingCollectionView = UICollectionView(frame: CGRect(x: 30, y: navigationBarHeight, width: self.view.bounds.width-60, height: 56), collectionViewLayout: layout)
+        if let ratingCollectionView = ratingCollectionView {
+            self.view.addSubview(ratingCollectionView)
+        }
+        ratingCollectionView?.showsHorizontalScrollIndicator = false
+        ratingCollectionView?.backgroundColor = .clear
+        ratingCollectionView?.delegate = self
+        ratingCollectionView?.dataSource = self
+        ratingCollectionView?.register(RatingCollectionViewCell.self)
+        let tableViewFrame = CGRect(origin: CGPoint(x: 0, y: navigationBarHeight + 56), size: CGSize(width: self.view.bounds.width, height: self.view.bounds.height - (self.navigationController?.navigationBar.bounds.height ?? 0)))
         movieTableView = UITableView(frame: tableViewFrame)
         movieTableView?.separatorStyle = .none
         if let movieTableView = movieTableView {
@@ -51,6 +68,7 @@ class SearchMovieViewController: UIViewController {
         movieTableView?.backgroundColor = .clear
         movieTableView?.delegate = self
         movieTableView?.dataSource = self
+        movieTableView?.keyboardDismissMode = .onDrag
         movieTableView?.register(StaffPicksTableViewCell.self)
         searchBar = UISearchBar(frame: CGRect(x: 0, y: 0, width: self.view.bounds.width-60, height: 48))
         if let textField = searchBar?.value(forKey: "searchField") as? UITextField {
@@ -72,6 +90,7 @@ class SearchMovieViewController: UIViewController {
         searchBar?.placeholder = "Search all movies"
         searchBar?.backgroundColor = .clear
         searchBar?.layoutIfNeeded()
+        searchBar?.delegate = self
         navigationItem.titleView = searchBar
     }
     
@@ -88,13 +107,24 @@ extension SearchMovieViewController: UITableViewDelegate, UITableViewDataSource 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: StaffPicksTableViewCell = tableView.dequeueReusableCell(for: indexPath)
         cell.celldata = movies[indexPath.row]
-        
+        cell.bookmarkHandler = { [unowned self] in
+            self.interactor?.bookmarkMovie(at: indexPath.row)
+        }
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.interactor?.didSelectMovie(movies[indexPath.row])
     }
 }
 
 
 extension SearchMovieViewController: SearchMovieViewControllerInterface {
+    func updateRatings(_ ratings: [RatingViewModel]) {
+        self.ratings = ratings
+        self.ratingCollectionView?.reloadData()
+    }
+    
     func updateMovies(_ movies: [StaffPicksViewModel]) {
         self.movies = movies
         self.movieTableView?.reloadData()
@@ -111,5 +141,38 @@ extension SearchMovieViewController: SearchMovieViewControllerInterface {
     }
     
     func showAlertView(message: String) {
+    }
+}
+
+extension SearchMovieViewController: UISearchBarDelegate {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        self.interactor?.searchMovieWith(title: searchText)
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        self.view.endEditing(true)
+    }
+}
+
+extension SearchMovieViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return self.ratings.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let ratingCell: RatingCollectionViewCell = collectionView.dequeueReusableCell(for: indexPath)
+        ratingCell.configureCell(data: self.ratings[indexPath.row])
+        return ratingCell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let rating = 5 - indexPath.row
+        let width: CGFloat = CGFloat((rating * 12) + 20)
+        let height: CGFloat = 12 + 16
+        return CGSize(width: width, height: height)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        interactor?.didSelectRating(at: indexPath.row)
     }
 }

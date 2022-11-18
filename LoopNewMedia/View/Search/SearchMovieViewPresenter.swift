@@ -12,6 +12,10 @@ class SearchMovieViewPresenter {
 }
 
 extension SearchMovieViewPresenter: SearchMovieViewPresenterInterface {
+    func updateRatings(_ ratings: [RatingViewModel]) {
+        viewController?.updateRatings(ratings)
+    }
+    
     func updateMovies(_ movies: [StaffPicksViewModel]) {
         viewController?.updateMovies(movies)
     }

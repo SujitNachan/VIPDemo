@@ -14,8 +14,20 @@ class StarsView: UIView {
             setNeedsLayout()
         }
     }
+    
+    @IBInspectable var ratingOutOf: Int = 5 {
+        didSet {
+            setNeedsLayout()
+        }
+    }
 
     @IBInspectable var defaultStarColor: UIColor = UIColor(white: 1, alpha: 0.4) {
+        didSet {
+            setNeedsLayout()
+        }
+    }
+    
+    @IBInspectable var filledStarColor: UIColor = #colorLiteral(red: 0.9998236299, green: 0.6797295809, blue: 0, alpha: 1) {
         didSet {
             setNeedsLayout()
         }
@@ -45,10 +57,10 @@ class StarsView: UIView {
         for sublayer in sublayers ?? [] {
             sublayer.removeFromSuperlayer()
         }
-        for i in 1...5 {
+        for i in 1...ratingOutOf {
             let star = starLayer(full: true)
             if rating >= Double(i) {
-                star.fillColor = #colorLiteral(red: 0.9998236299, green: 0.6797295809, blue: 0, alpha: 1).cgColor
+                star.fillColor = filledStarColor.cgColor
             } else {
                 star.fillColor = defaultStarColor.cgColor
             }

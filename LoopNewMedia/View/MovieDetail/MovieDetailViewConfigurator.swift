@@ -11,7 +11,7 @@ struct MovieDetailViewConfigurator: Configurator {
     private let movie: Movie
     private let bookmarkHandler: (() -> Void)?
     
-    init(movie: Movie, bookmarkHandler: (() -> Void)?) {
+    init(movie: Movie, bookmarkHandler: (() -> Void)? = nil) {
         self.movie = movie
         self.bookmarkHandler = bookmarkHandler
     }

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="RatingCollectionViewCell" customModule="LoopNewMedia" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="131" height="25"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="131" height="25"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NiQ-gJ-NMw">
+                        <rect key="frame" x="0.0" y="0.0" width="131" height="25"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xPX-kS-ZLl" customClass="StarsView" customModule="LoopNewMedia" customModuleProvider="target">
+                                <rect key="frame" x="10" y="8" width="111" height="9"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="xPX-kS-ZLl" secondAttribute="bottom" constant="8" id="ECh-hd-Rve"/>
+                            <constraint firstItem="xPX-kS-ZLl" firstAttribute="top" secondItem="NiQ-gJ-NMw" secondAttribute="top" constant="8" id="Ng9-wV-dwM"/>
+                            <constraint firstAttribute="trailing" secondItem="xPX-kS-ZLl" secondAttribute="trailing" constant="10" id="UTa-SU-I8R"/>
+                            <constraint firstItem="xPX-kS-ZLl" firstAttribute="leading" secondItem="NiQ-gJ-NMw" secondAttribute="leading" constant="10" id="dIU-kL-aIV"/>
+                        </constraints>
+                    </view>
+                </subviews>
+            </view>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="NiQ-gJ-NMw" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="5F8-JR-RvJ"/>
+                <constraint firstAttribute="bottom" secondItem="NiQ-gJ-NMw" secondAttribute="bottom" id="BsL-3j-GJM"/>
+                <constraint firstAttribute="trailing" secondItem="NiQ-gJ-NMw" secondAttribute="trailing" id="I6s-35-rdy"/>
+                <constraint firstItem="NiQ-gJ-NMw" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="tQg-Je-6eT"/>
+            </constraints>
+            <size key="customSize" width="131" height="41"/>
+            <connections>
+                <outlet property="ratingContainerView" destination="NiQ-gJ-NMw" id="S1y-bJ-J7a"/>
+                <outlet property="ratingView" destination="xPX-kS-ZLl" id="NYE-UT-cqd"/>
+            </connections>
+            <point key="canvasLocation" x="196.37681159420291" y="56.584821428571423"/>
+        </collectionViewCell>
+    </objects>
+</document>

@@ -13,11 +13,16 @@ protocol SearchMovieViewControllerInterface: PresenterViewInterface {
     func showAlertView(message: String)
     func reloadBookmarkCell(at index: Int)
     func updateMovies(_ movies: [StaffPicksViewModel])
+    func updateRatings(_ ratings: [RatingViewModel])
 }
 
 protocol SearchMovieViewInteractorInterface {
+    func getRatings()
     func getMovies()
     func bookmarkMovie(at index: Int)
+    func didSelectMovie(_ movie: StaffPicksViewModel)
+    func searchMovieWith(title: String?)
+    func didSelectRating(at index: Int)
 }
 
 protocol SearchMovieViewPresenterInterface {
@@ -26,8 +31,9 @@ protocol SearchMovieViewPresenterInterface {
     func showAlertView(message: String)
     func reloadBookmarkCell(at index: Int)
     func updateMovies(_ movies: [StaffPicksViewModel])
+    func updateRatings(_ ratings: [RatingViewModel])
 }
 
 protocol SearchMovieViewRouterInterface {
-//    func navigateToDetailsScreen(homeCollectionViewModel: HomeCollectionViewModel)
+    func navigateToDetailsScreen(_ movie: Movie, bookmarkHandler: (() -> Void)?)
 }

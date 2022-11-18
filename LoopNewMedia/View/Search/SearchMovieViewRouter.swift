@@ -12,5 +12,8 @@ class SearchMovieViewRouter {
 }
 
 extension SearchMovieViewRouter: SearchMovieViewRouterInterface {
-
+    func navigateToDetailsScreen(_ movie: Movie, bookmarkHandler: (() -> Void)?) {
+        let movieDetailConfigurator = MovieDetailViewConfigurator(movie: movie, bookmarkHandler: bookmarkHandler)
+        self.viewController?.present(UINavigationController(rootViewController: movieDetailConfigurator.configViewController()), animated: true)
+    }
 }
