@@ -59,7 +59,7 @@ class SearchMovieViewController: UIViewController {
         ratingCollectionView?.delegate = self
         ratingCollectionView?.dataSource = self
         ratingCollectionView?.register(RatingCollectionViewCell.self)
-        let tableViewFrame = CGRect(origin: CGPoint(x: 0, y: navigationBarHeight + 56), size: CGSize(width: self.view.bounds.width, height: self.view.bounds.height - (self.navigationController?.navigationBar.bounds.height ?? 0)))
+        let tableViewFrame = CGRect(origin: CGPoint(x: 0, y: navigationBarHeight + 56), size: CGSize(width: self.view.bounds.width, height: self.view.bounds.height - navigationBarHeight))
         movieTableView = UITableView(frame: tableViewFrame)
         movieTableView?.separatorStyle = .none
         if let movieTableView = movieTableView {
@@ -150,7 +150,7 @@ extension SearchMovieViewController: UISearchBarDelegate {
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        self.view.endEditing(true)
+        searchBar.resignFirstResponder()
     }
 }
 
